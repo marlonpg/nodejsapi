@@ -3,7 +3,8 @@ var express    = require('express');
 var app        = express(); // define our app using express
 var bodyParser = require('body-parser');
 var mongoose   = require('mongoose');
-var Monster     = require('./app/models/monster');
+var Monster    = require('./app/models/monster');
+var User       = require('./app/models/user');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -35,6 +36,64 @@ router.use(function(req, res, next) {
 router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });
 });
+
+
+// on routes that end in /users
+// ----------------------------------------------------
+router.route('/users/:user*?')
+// create a user (accessed at POST http://localhost:8080/api/users)
+    .post(function(req, res) {
+		User.create(req.body, function(err, user) {
+            if (err)
+                res.send(err);
+
+            res.send(user);
+        });
+    })
+        // get all the monsters (accessed at GET http://localhost:8080/api/users)
+    .get(function(req, res) {
+		if(req.params.user){
+			User.find({"user":req.params.user}, function(err, user) {
+				if (err)
+					res.send(err);
+				res.json(user);
+			});
+		}else{
+			User.find(function(err, users) {
+				if (err)
+					res.send(err);
+				res.json(users);
+			});
+		}
+    })
+	
+	// delete the user with this user NAme (accessed at DELETE http://localhost:8080/api/users/:user)
+	.delete(function(req, res) {
+		if(req.params.user){
+			User.remove({
+				user: req.params.user
+			}, function(err, user) {
+				if (err)
+					res.send(err);
+				res.send(user);
+			});
+		}else{
+			res.json({ message: 'User missing' });
+		}
+	})
+	
+	.put(function(req, res) {
+		if(req.params.user){
+			// use our user model to find the monster we want
+			User.update({"user":req.params.user},req.body, function(err, user) {
+				if (err)
+					res.send(err);
+				res.send(user);
+			});
+		}else{
+			res.json({ message: 'user missing!' });
+		}
+	})
 
 // on routes that end in /monsters
 // ----------------------------------------------------
