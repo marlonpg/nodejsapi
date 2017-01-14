@@ -53,10 +53,10 @@ router.route('/users/:user*?')
         // get all the monsters (accessed at GET http://localhost:8080/api/users)
     .get(function(req, res) {
 		if(req.params.user){
-			User.find({"user":req.params.user}, function(err, user) {
+			User.find({"user": new RegExp('\\b' + req.params.user + '\\b', 'i')}, function(err, user) {
 				if (err)
 					res.send(err);
-				res.json(user);
+				res.json(user[0]);
 			});
 		}else{
 			User.find(function(err, users) {
@@ -123,6 +123,7 @@ router.route('/monsters')
                 res.json(monsters);
             });
         });
+		
 // on routes that end in /monsters/:monster_id
 // ----------------------------------------------------
 router.route('/monsters/:monster_id')
