@@ -2,11 +2,16 @@ var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
 var UsuarioSchema   = new Schema({
-    user:  { type: String, index: { unique: true }, required: [true, 'User is mandatory!'] },
+    user:  { type: String, index: { unique: true }},
 	password: String,
 	email: String,
-	level: Number,
-	experience: Number
+	experience: { type: Number, default: 0 },
+	nivel: { type: Number, default: 1 },
+	XP: { type: Number, default: 0 },
+	energia:{ type: Number, default: 20 },
+	itens:[{id : Number }],
+	money: { type: Number, default: 0 },
+	premiumCristal: { type: Number, default: 20 },
 	
 });
 

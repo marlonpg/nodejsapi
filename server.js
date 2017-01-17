@@ -95,6 +95,16 @@ router.route('/users/:user*?')
 		}
 	})
 
+
+router.route('/users/id/:userId')
+	.get(function(req, res) {
+		User.findById(req.params.userId, function(err, user) {
+			 if (err)
+				res.send(err);
+			res.send(user);
+		});
+	})
+	
 // on routes that end in /monsters
 // ----------------------------------------------------
 router.route('/monsters')
