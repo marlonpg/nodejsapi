@@ -15,7 +15,13 @@ var MonsterSchema   = new Schema({
 	criticalDamage: Number,
 	evasion: Number,
 	accuracy: Number,
-	isEnemy: Boolean
+	isEnemy: Boolean,
+	prefab:String,
+	userId:String,
+	position: Number,
+	skills: []
 });
+
+
 
 module.exports = mongoose.model('Monster', MonsterSchema);

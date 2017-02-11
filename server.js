@@ -96,7 +96,7 @@ router.route('/users/:user*?')
 	})
 
 
-router.route('/users/id/:userId')
+router.route('/users/id/0:userId')
 	.get(function(req, res) {
 		User.findById(req.params.userId, function(err, user) {
 			 if (err)
@@ -111,18 +111,13 @@ router.route('/monsters')
 
     // create a monster (accessed at POST http://localhost:8080/api/monsters)
     .post(function(req, res) {
-
-        var monster = new Monster();      // create a new instance of the Monster model
-        monster.name = req.body.name;  // set the monsters name (comes from the request)
-
-        // save the monster and check for errors
-        monster.save(function(err) {
+		Monster.create(req.body, function(err, mosnter) {
             if (err)
                 res.send(err);
-
-            res.json({ message: 'Monster created!' });
+			console.log(err);
+			console.log(mosnter);
+            res.send(mosnter);
         });
-
     })
         // get all the monsters (accessed at GET http://localhost:8080/api/monsters)
         .get(function(req, res) {
@@ -133,6 +128,18 @@ router.route('/monsters')
                 res.json(monsters);
             });
         });
+		
+router.route('/monsters/user/:userId')
+.get(function(req, res) {
+	console.log(req.params.userId);
+    Monster.find({ userId: req.params.userId },null,{sort: {position: 1}}, function(err, monster) {
+		console.log(err);
+		console.log(monster);
+        if (err)
+            res.send(err);
+        res.json(monster);
+    });
+})
 		
 // on routes that end in /monsters/:monster_id
 // ----------------------------------------------------
