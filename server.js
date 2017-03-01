@@ -114,9 +114,20 @@ router.route('/monsters')
 		Monster.create(req.body, function(err, mosnter) {
             if (err)
                 res.send(err);
-			console.log(err);
-			console.log(mosnter);
             res.send(mosnter);
+        });
+    })
+	
+	 // create a monster (accessed at PUT http://localhost:8080/api/monsters)
+    .put(function(req, res) {
+		Monster.update({ '_id': req.body.Id }, { $set:  { 'Selected': req.body.Selected }}, function(err, mosnter) {
+			 
+            if (err){
+                res.send(err);
+			}else{
+				res.send(mosnter);
+			}
+            
         });
     })
         // get all the monsters (accessed at GET http://localhost:8080/api/monsters)
@@ -131,10 +142,7 @@ router.route('/monsters')
 		
 router.route('/monsters/user/:userId')
 .get(function(req, res) {
-	console.log(req.params.userId);
-    Monster.find({ userId: req.params.userId },null,{sort: {position: 1}}, function(err, monster) {
-		console.log(err);
-		console.log(monster);
+    Monster.find({ UserId: req.params.userId }, function(err, monster) {
         if (err)
             res.send(err);
         res.json(monster);
