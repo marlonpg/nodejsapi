@@ -5,6 +5,11 @@ var bodyParser = require('body-parser');
 var mongoose   = require('mongoose');
 var Monster    = require('./app/models/monster');
 var User       = require('./app/models/user');
+var path = require('path');
+var fs    = require('fs');
+
+
+app.use(express.static('./static'));
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -14,6 +19,19 @@ app.use(bodyParser.json());
 //  Set the environment variables we need.
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+
+function getImages(imageDir, callback) {
+    var fileType = '.png',
+        files = [], i;
+    fs.readdir(imageDir, function (err, list) {
+        for(i=0; i<list.length; i++) {
+            if(path.extname(list[i]) === fileType) {
+                files.push(list[i]); //store the file name into the array files
+            }
+        }
+        callback(err, files);
+    });
+}
 
 if (typeof ipaddress === "undefined") {
     //  Log errors on OpenShift but continue w/ 127.0.0.1 - this
@@ -105,6 +123,14 @@ router.route('/users/id/0:userId')
 		});
 	})
 	
+router.route('/monster/images')
+	.get(function(req, res) {
+		res.header('Access=Control-Allow-Origin', '*');
+		var imageDir = './static/Monsters';
+		getImages(imageDir, function (err, files) {
+             res.send(files);
+        });
+	})
 // on routes that end in /monsters
 // ----------------------------------------------------
 router.route('/monsters')
