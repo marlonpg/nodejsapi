@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var mongoose   = require('mongoose');
 var Monster    = require('./app/models/monster');
 var User       = require('./app/models/user');
+var TPL_Monster    = require('./app/models/tpl_monster');
 var path = require('path');
 var fs    = require('fs');
 
@@ -133,6 +134,17 @@ router.route('/monster/images')
 	})
 // on routes that end in /monsters
 // ----------------------------------------------------
+router.route('/tpl_monster')
+	.post(function(req, res) {
+		console.log(req.body);
+		TPL_Monster.create(req.body, function(err, tpl_mosnter) {
+            if (err)
+                res.send(err);
+            res.send(tpl_mosnter);
+        });
+    })
+
+
 router.route('/monsters')
 
     // create a monster (accessed at POST http://localhost:8080/api/monsters)
