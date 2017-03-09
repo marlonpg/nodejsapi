@@ -1,0 +1,25 @@
+<form id="serachForm" ng-controller="search">
+	<div style="width:100%;">
+		<label for="name"><span>Serach for: </span>
+		<input type="text" ng-model="searchText.Name" style="width: 100%;" id="name" /></label>
+	</div>
+	<div style="width:100%;">
+		<table style="width: 100%;">
+			<tbody>
+				<tr style="width: 5%;">
+					<th>Monster</th>
+					<th style="width: 85%;">Monster Name</th>
+					<th style="width: 10%;">Actions</th>
+				</tr>
+				<tr ng:repeat="i in tpl_monster.items | filter:searchText | orderBy: 'Name'">
+					<td><img ng-src="./Monsters/{{i.SpriteName}}.png" width="80" height="80" /></td>
+					<td>{{i.Name}}</td>
+					<td>
+						<img ng-src="./images/edit.png" ng-click="changePage(1);loadRegister(i);" style="cursor: pointer;" width="40" height="40" />
+						<img ng-src="./images/delete.png" confirmed-click="deleteMonster(i)" ng-confirm-click="Would you like to delete the monster {{i.Name}}?" style="cursor: pointer;" width="40" height="40" />
+					</td>
+				</tr>
+		  </tbody>
+		</table>
+	</div>
+</form>

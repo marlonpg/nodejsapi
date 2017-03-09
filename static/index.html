@@ -9,88 +9,23 @@
 			label { width: 200px; float: left; margin: 0 20px 0 0; }
 			span { display: block; margin: 0 0 3px; font-size: 1.2em; font-weight: bold; }
 			input[type=text] input[type=number] input[type=checkbox]{ width: 200px; border: 1px solid #000; padding: 5px; }
-			div { display: inline-block; margin: auto;}
+			div { display: inline-block; margin: auto}
 			button{margin-top:10px; width: 35px; font-size: 1.5em; font-weight: bold;}
+			table { border-width: 1px; border-spacing: 2px; border-style: outset; border-color: gray; border-collapse: separate; background-color: white;}
+			td { border-width: 1px; padding: 1px; border-style: inset; border-color: gray; background-color: white; -moz-border-radius: ;}
 		</style>
 
 
 
     </head>
 
-    <body ng-app="app" ng-controller="monster">
-	
-		<form id="monsterForm">
-			<div>
-				<label for="name"><span>Name: </span>
-				<input type="text" id="name" ng-model="tpl_monster.Name" /></label>
-				
-				<label for="level"><span>Level: </span>
-				<input type="number" id="level" ng-model="tpl_monster.Level"  /></label>
-				
-				<label for="Attack"><span>Attack: </span>
-				<input type="number" id="Attack" ng-model="tpl_monster.Attack" /></label>
-				
-				<label for="Defense"><span>Defense: </span>
-				<input type="number" id="Defense" ng-model="tpl_monster.Defense"  /></label>
-				
-				<label for="MagicAttack"><span>MagicAttack: </span>
-				<input type="number" id="MagicAttack" ng-model="tpl_monster.MagicAttack"  /></label>
-				
-				<label for="MagicDefense"><span>MagicDefense: </span>
-				<input type="number" id="MagicDefense" ng-model="tpl_monster.MagicDefense"  /></label>
-				
-				<label for="Speed"><span>Speed: </span>
-				<input type="number" id="Speed" ng-model="tpl_monster.Speed"  /></label>
-				
-				<label for="Type"><span>Type: </span>
-				<input type="text" id="Type"  ng-model="tpl_monster.Type" /></label>
-				
-				<label for="CriticalChance"><span>CriticalChance: </span>
-				<input type="number" id="CriticalChance" ng-model="tpl_monster.CriticalChance"  /></label>
-				
-				<label for="CriticalDamage"><span>CriticalDamage: </span>
-				<input type="number" id="CriticalDamage" ng-model="tpl_monster.CriticalDamage"  /></label>
-				
-				<label for="Evasion"><span>Evasion: </span>
-				<input type="number" id="Evasion" ng-model="tpl_monster.Evasion"  /></label>
-				
-				<label for="Accuracy"><span>Accuracy: </span>
-				<input type="number" id="Accuracy" ng-model="tpl_monster.Accuracy"  /></label>
-				
-				<label for="IsEnemy"><span>IsEnemy: </span>
-				<input type="checkbox" id="IsEnemy" ng-model="tpl_monster.IsEnemy"  /></label>
-				
-			</div>
-			
-			<div>
-				<LEGEND><span>Skills: </span></LEGEND>
-				<fieldset data-ng-repeat="skill in tpl_monster.skills" style="border: 0px; padding:0px;">
-					<label for="type"><span>Type: </span>
-					<input type="text" ng-model="skill.type" id="type" /></label>
-					
-					<label for="baseDamage"><span>Base Damage: </span>
-					<input type="number" ng-model="skill.baseDamage" id="baseDamage" /></label>
-					
-					<label for="baseAttribute"><span>Base Attribute: </span>
-					<input type="text" ng-model="skill.baseAttribute" id="baseAttribute" /></label>
-					
-					<label for="accuracy"><span>Accuracy: </span>
-					<input type="number" ng-model="skill.accuracy" id="accuracy" /></label>
-					
-					<button ng-click="removeSkill(skill)" id="less"><span>-</span></button>
-					<button ng-click="addSkill()" id="more" /><span>+</span></button>
-				</fieldset>
-			</div>
-			<div>
-				<LEGEND><span>Chose a Monster: </span></LEGEND>
-				<div id="fileNames" style="border: 3px solid #73AD21;" data-ng-repeat="img in imgs.name">
-					<input id="option" type="radio" name="field" value="{{img}}" style="float:left;"  ng-model="tpl_monster.SpriteName"   />
-					<img ng-src="./Monsters/{{img}}" width="80" height="80" style="float:left;" />
-				</div>
-				
-			</div>
-			<input type="submit" ng-click="save(tpl_monster)" value="Save" />
-			<input type="button" ng-click="reset()" value="Reset" />
-		</form>
+    <body ng-app="app" ng-controller="main">
+		<div>
+			<form>
+				<input type="button" ng-click="changePage(1)" value="Register" />
+				<input type="button" ng-click="changePage(0)" value="Search" />
+			</form>
+		</div>
+		<div class="slide-animate"  ng-include="page.url"></div>
     </body>
 </html>

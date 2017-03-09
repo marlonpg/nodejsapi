@@ -1,0 +1,77 @@
+<form id="monsterForm" ng-controller="monster">
+	<div>
+		<label for="name"><span>Name: </span>
+		<input type="text" id="name" ng-model="tpl_monster.Name" /></label>
+		
+		<label for="level"><span>Level: </span>
+		<input type="number" id="level" value="0" ng-model="tpl_monster.Level"  /></label>
+		
+		<label for="Hp"><span>Hp: </span>
+		<input type="number" id="Hp" value="0" ng-model="tpl_monster.Hp"  /></label>
+		
+		<label for="Attack"><span>Attack: </span>
+		<input type="number" id="Attack" value="0" ng-model="tpl_monster.Attack" /></label>
+		
+		<label for="Defense"><span>Defense: </span>
+		<input type="number" id="Defense" value="0" ng-model="tpl_monster.Defense"  /></label>
+		
+		<label for="MagicAttack"><span>MagicAttack: </span>
+		<input type="number" id="MagicAttack" value="0" ng-model="tpl_monster.MagicAttack"  /></label>
+		
+		<label for="MagicDefense"><span>MagicDefense: </span>
+		<input type="number" id="MagicDefense" value="0" ng-model="tpl_monster.MagicDefense"  /></label>
+		
+		<label for="Speed"><span>Speed: </span>
+		<input type="number" id="Speed" value="0" ng-model="tpl_monster.Speed"  /></label>
+		
+		<label for="Type"><span>Type: </span>
+		<input type="text" id="Type"  ng-model="tpl_monster.Type" /></label>
+		
+		<label for="CriticalChance"><span>CriticalChance: </span>
+		<input type="number" id="CriticalChance" value="0" ng-model="tpl_monster.CriticalChance"  /></label>
+		
+		<label for="CriticalDamage"><span>CriticalDamage: </span>
+		<input type="number" id="CriticalDamage" value="0" value="0" ng-model="tpl_monster.CriticalDamage"  /></label>
+		
+		<label for="Evasion"><span>Evasion: </span>
+		<input type="number" id="Evasion" value="0" ng-model="tpl_monster.Evasion"  /></label>
+		
+		<label for="Accuracy"><span>Accuracy: </span>
+		<input type="number" id="Accuracy"  value="0" ng-model="tpl_monster.Accuracy"  /></label>
+		
+		<label for="IsEnemy"><span>IsEnemy: </span>
+		<input type="checkbox" id="IsEnemy" ng-model="tpl_monster.IsEnemy"  /></label>
+		
+	</div>
+	
+	<div>
+		<LEGEND><span>Skills: </span></LEGEND>
+		<fieldset data-ng-repeat="skill in tpl_monster.skills" style="border: 0px; padding:0px;">
+			<label for="type"><span>Type: </span>
+			<input type="text" ng-model="skill.type" id="type" /></label>
+			
+			<label for="baseDamage"><span>Base Damage: </span>
+			<input type="number" value="0" ng-model="skill.baseDamage" id="baseDamage" /></label>
+			
+			<label for="baseAttribute"><span>Base Attribute: </span>
+			<input type="text" ng-model="skill.baseAttribute" id="baseAttribute" /></label>
+			
+			<label for="accuracy"><span>Accuracy: </span>
+			<input type="number" value="0" ng-model="skill.accuracy" id="accuracy" /></label>
+			
+			<button ng-click="removeSkill(skill)" id="less"><span>-</span></button>
+			<button ng-click="addSkill()" id="more"><span>+</span></button>
+		</fieldset>
+	</div>
+	<div>
+		<LEGEND><span>Chose a Monster: </span></LEGEND>
+		<div id="fileNames" style="border: 3px solid #73AD21;" data-ng-repeat="imagens in imgs.name">
+			<input id="option" type="radio" name="field" value="{{imagens.sprite}}" style="float:left;"  ng-model="tpl_monster.SpriteName"   />
+			<img ng-src="./Monsters/{{imagens.file}}" width="80" height="80" style="float:left;" />
+		</div>
+		
+	</div>
+	<input type="submit" ng-show="{{isUpdate}}" ng-click="update(tpl_monster)" value="Update" />
+	<input type="submit" ng-show="{{isSave}}" ng-click="save(tpl_monster)" value="Save" />
+	<input type="button" ng-click="reset()" value="Reset" />
+</form>

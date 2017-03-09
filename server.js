@@ -27,7 +27,8 @@ function getImages(imageDir, callback) {
     fs.readdir(imageDir, function (err, list) {
         for(i=0; i<list.length; i++) {
             if(path.extname(list[i]) === fileType) {
-                files.push(list[i]); //store the file name into the array files
+				var img = {'file': list[i], 'sprite':list[i].substring(0, list[i].length-4)};
+                files.push(img); //store the file name into the array files
             }
         }
         callback(err, files);
@@ -134,16 +135,54 @@ router.route('/monster/images')
 	})
 // on routes that end in /monsters
 // ----------------------------------------------------
-router.route('/tpl_monster')
+router.route('/tpl_monster/:id?')
 	.post(function(req, res) {
-		console.log(req.body);
 		TPL_Monster.create(req.body, function(err, tpl_mosnter) {
             if (err)
                 res.send(err);
             res.send(tpl_mosnter);
         });
     })
+	.get(function(req, res) {
+		TPL_Monster.find(function(err, tpl_monsters) {
+			if (err)
+				res.send(err);
 
+			res.json(tpl_monsters);
+		});
+	})
+	.delete(function(req, res) {
+		TPL_Monster.findByIdAndRemove(req.params.id, function(err, tpl_mosnter) {
+			if (err)
+				res.send(err);
+			res.json({ message: 'Successfully deleted' });
+		});
+	})
+	.put(function(req, res) {
+		TPL_Monster.update({_id: req.body._id}, 
+			{
+				Name: req.body.Name,
+				Level: req.body.Level,
+				Hp: req.body.Hp,
+				Attack: req.body.Attack,
+				Defense: req.body.Defense,
+				MagicAttack: req.body.MagicAttack,
+				MagicDefense: req.body.MagicDefense,
+				Speed: req.body.Speed,
+				Type: req.body.Type,
+				CriticalChance: req.body.CriticalChance,
+				CriticalDamage: req.body.CriticalDamage,
+				Evasion: req.body.Evasion,
+				Accuracy: req.body.Accuracy,
+				IsEnemy: req.body.IsEnemy,
+				SpriteName:req.body.SpriteName,
+				skills: req.body.skills
+			}, function(err, tpl_mosnter) {
+			if (err)
+				res.send(err);
+			res.json(tpl_mosnter);
+		});
+	});
 
 router.route('/monsters')
 
