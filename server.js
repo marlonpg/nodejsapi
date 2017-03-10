@@ -216,6 +216,15 @@ router.route('/monsters')
                 res.json(monsters);
             });
         });
+router.route('/monsters/selected/user/:userId')
+.get(function(req, res) {
+    Monster.find({ UserId: req.params.userId, "Selected": true }, function(err, monster) {
+        if (err)
+            res.send(err);
+        res.json(monster);
+    });
+})
+
 		
 router.route('/monsters/user/:userId')
 .get(function(req, res) {

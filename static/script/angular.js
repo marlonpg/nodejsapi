@@ -28,7 +28,11 @@ app.controller('monster', function($scope, $http, factoryService) {
 		}
 	};
 	$scope.save = function(tpl_monster){
-		var res = $http.post('http://games123-moraes001.rhcloud.com/api/tpl_monster', tpl_monster);
+		var res = $http.post('http://games123-moraes001.rhcloud.com/api/tpl_monster', tpl_monster).then(function (response) {
+			if (response.data){
+				alert("Monster " + tpl_monster.Name + " saved sucefully.");
+			}
+		});
 		$scope.tpl_monster={};
 		$scope.tpl_monster.skills = [{type: '', baseDamage:0, baseAttribute:'', accuracy:0}];
 	};
@@ -37,7 +41,11 @@ app.controller('monster', function($scope, $http, factoryService) {
 		$scope.tpl_monster.skills = [{type: '', baseDamage:0, baseAttribute:'', accuracy:0}];
 	};
 	$scope.update = function(tpl_monster){
-		$http.put('http://games123-moraes001.rhcloud.com/api/tpl_monster',tpl_monster);
+		$http.put('http://games123-moraes001.rhcloud.com/api/tpl_monster',tpl_monster).then(function (response) {
+			if (response.data){
+				alert("Monster " + tpl_monster.Name + " updated sucefully.");
+			}
+		});
 	};
 });
 app.controller('main', function($scope, $http, factoryService) {
@@ -62,6 +70,7 @@ app.controller('search', function($scope, $http, factoryService) {
 	$scope.deleteMonster = function(tpl_monster){
 		$http.delete('http://games123-moraes001.rhcloud.com/api/tpl_monster/'+ tpl_monster._id).then(function (response) {
 			if (response.data){
+				alert("Monster " + tpl_monster.Name + " deleted sucefully.");
 				var index = $scope.tpl_monster.items.indexOf(tpl_monster);
 				$scope.tpl_monster.items.splice(index,1);
 			}

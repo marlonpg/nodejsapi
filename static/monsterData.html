@@ -71,7 +71,7 @@
 		</div>
 		
 	</div>
-	<input type="submit" ng-show="{{isUpdate}}" ng-click="update(tpl_monster)" value="Update" />
-	<input type="submit" ng-show="{{isSave}}" ng-click="save(tpl_monster)" value="Save" />
+	<input type="submit" ng-show="{{isUpdate}}" ng-click="update(tpl_monster);changePage(0)" value="Update" />
+	<input type="submit" ng-show="{{isSave}}" ng-click="save(tpl_monster);changePage(0)" value="Save" />
 	<input type="button" ng-click="reset()" value="Reset" />
 </form>
