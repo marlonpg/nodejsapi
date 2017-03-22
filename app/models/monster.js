@@ -19,7 +19,7 @@ var MonsterSchema   = new Schema({
 	SpriteName:String,
 	UserId:String,
 	Selected: Boolean,
-	skills: []
+	Skills: []
 });
 
 

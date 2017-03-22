@@ -3,6 +3,7 @@ var express    = require('express');
 var app        = express(); // define our app using express
 var bodyParser = require('body-parser');
 var mongoose   = require('mongoose');
+var ramdom     = require('mongoose-query-random');
 var Monster    = require('./app/models/monster');
 var User       = require('./app/models/user');
 var TPL_Monster    = require('./app/models/tpl_monster');
@@ -181,6 +182,15 @@ router.route('/tpl_monster/:id?')
 			if (err)
 				res.send(err);
 			res.json(tpl_mosnter);
+		});
+	});
+
+router.route('/tpl_monsters/random/:number')	
+	.get(function(req, res) {
+		TPL_Monster.find().random(req.params.number, true, function(err, monsters) {
+			if (err)
+				res.send(err);
+			res.json(monsters);
 		});
 	});
 
