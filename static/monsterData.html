@@ -46,18 +46,18 @@
 	
 	<div>
 		<LEGEND><span>Skills: </span></LEGEND>
-		<fieldset data-ng-repeat="skill in tpl_monster.skills" style="border: 0px; padding:0px;">
+		<fieldset data-ng-repeat="skill in tpl_monster.Skills" style="border: 0px; padding:0px;">
 			<label for="type"><span>Type: </span>
-			<input type="text" ng-model="skill.type" id="type" /></label>
+			<input type="text" ng-model="skill.Type" id="type" /></label>
 			
 			<label for="baseDamage"><span>Base Damage: </span>
-			<input type="number" value="0" ng-model="skill.baseDamage" id="baseDamage" /></label>
+			<input type="number" value="0" ng-model="skill.BaseDamage" id="baseDamage" /></label>
 			
 			<label for="baseAttribute"><span>Base Attribute: </span>
-			<input type="text" ng-model="skill.baseAttribute" id="baseAttribute" /></label>
+			<input type="text" ng-model="skill.BaseAttribute" id="baseAttribute" /></label>
 			
 			<label for="accuracy"><span>Accuracy: </span>
-			<input type="number" value="0" ng-model="skill.accuracy" id="accuracy" /></label>
+			<input type="number" value="0" ng-model="skill.Accuracy" id="accuracy" /></label>
 			
 			<button ng-click="removeSkill(skill)" id="less"><span>-</span></button>
 			<button ng-click="addSkill()" id="more"><span>+</span></button>

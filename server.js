@@ -117,7 +117,7 @@ router.route('/users/:user*?')
 	})
 
 
-router.route('/users/id/0:userId')
+router.route('/user/id/:userId')
 	.get(function(req, res) {
 		User.findById(req.params.userId, function(err, user) {
 			 if (err)
@@ -160,7 +160,7 @@ router.route('/tpl_monster/:id?')
 		});
 	})
 	.put(function(req, res) {
-		TPL_Monster.update({_id: req.body._id}, 
+		TPL_Monster.update({_id:req.body._id}, 
 			{
 				Name: req.body.Name,
 				Level: req.body.Level,
@@ -177,17 +177,51 @@ router.route('/tpl_monster/:id?')
 				Accuracy: req.body.Accuracy,
 				IsEnemy: req.body.IsEnemy,
 				SpriteName:req.body.SpriteName,
-				skills: req.body.skills
-			}, function(err, tpl_mosnter) {
+				Skills: req.body.Skills
+			},  {multi: false}, function(err, tpl_mosnter) {
 			if (err)
 				res.send(err);
 			res.json(tpl_mosnter);
 		});
 	});
 
-router.route('/tpl_monsters/random/:number')	
+	
+router.route('/rename')
 	.get(function(req, res) {
-		TPL_Monster.find().random(req.params.number, true, function(err, monsters) {
+		var query = TPL_Monster.find({  });
+		query.exec(function (err, monsters) {
+			if (err) return handleError(err);
+			monsters.forEach(function(item) {
+				var Skills = item.get('Skills');
+				for(i = 0; i != Skills.length; ++i)
+				{
+					Skills[i].Accuracy = Skills[i].accuracy;
+					Skills[i].BaseAttribute = Skills[i].baseAttribute;
+					Skills[i].BaseDamage = Skills[i].baseDamage;
+					Skills[i].Type = Skills[i].type;
+					delete Skills[i].accuracy;
+					delete Skills[i].baseAttribute;
+					delete Skills[i].baseDamage;
+					delete Skills[i].type;
+				}
+				item.set('Skills',Skills);
+				console.log(item.get('_id'));
+				var id = item.get('_id');
+				delete item['_id'];
+				console.log(item.get('_id'));
+				TPL_Monster.update({'_id': id}, item, function(err, monster) {
+					if (err)
+						console.log(err);
+					console.log(monster);
+				});
+			});
+		});
+		res.send("Success");
+	});
+	
+router.route('/tpl_monsters/random/isEnemy/:enemy/number/:number')	
+	.get(function(req, res) {
+		TPL_Monster.find({ 'IsEnemy': req.params.enemy.toLowerCase() }).random(req.params.number, true, function(err, monsters) {
 			if (err)
 				res.send(err);
 			res.json(monsters);

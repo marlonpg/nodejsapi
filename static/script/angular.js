@@ -7,24 +7,24 @@ app.controller('monster', function($scope, $http, factoryService) {
 		$scope.imgs.name = response.data;
 	});
 	var tpl_monster = {};
-	var skills = [{type: '', baseDamage:0, baseAttribute:'', accuracy:0}];
+	var Skills = [{Type: '', BaseDamage:0, BaseAttribute:'', Accuracy:0}];
 	$scope.isUpdate = factoryService.getUpdate();;
 	$scope.isSave = !$scope.isUpdate;
 	factoryService.setUpdate(false);
-	$scope.tpl_monster.skills = factoryService.getSkills();
+	$scope.tpl_monster.Skills = factoryService.getSkills();
 	
 	factoryService.setTpl_monster(tpl_monster);
-	factoryService.setSkills(skills);
+	factoryService.setSkills(Skills);
 	$scope.addSkill = function(){
-		var newItem = $scope.tpl_monster.skills.length +1;
-		$scope.tpl_monster.skills.push({type: '', baseDamage:0, baseAttribute:'', accuracy:0});
+		var newItem = $scope.tpl_monster.Skills.length +1;
+		$scope.tpl_monster.Skills.push({Type: '', BaseDamage:0, BaseAttribute:'', Accuracy:0});
 	};
 	$scope.removeSkill = function(itemToRemove){
-		var index = $scope.tpl_monster.skills.indexOf(itemToRemove);
-		$scope.tpl_monster.skills.splice(index,1);
-		if($scope.tpl_monster.skills.length == 0){
-			var newItem = $scope.tpl_monster.skills.length +1;
-			$scope.tpl_monster.skills.push({type: '', baseDamage:0, baseAttribute:'', accuracy:0});
+		var index = $scope.tpl_monster.Skills.indexOf(itemToRemove);
+		$scope.tpl_monster.Skills.splice(index,1);
+		if($scope.tpl_monster.Skills.length == 0){
+			var newItem = $scope.tpl_monster.Skills.length +1;
+			$scope.tpl_monster.Skills.push({Type: '', BaseDamage:0, BaseAttribute:'', Accuracy:0});
 		}
 	};
 	$scope.save = function(tpl_monster){
@@ -34,11 +34,11 @@ app.controller('monster', function($scope, $http, factoryService) {
 			}
 		});
 		$scope.tpl_monster={};
-		$scope.tpl_monster.skills = [{type: '', baseDamage:0, baseAttribute:'', accuracy:0}];
+		$scope.tpl_monster.Skills = [{Type: '', BaseDamage:0, BaseAttribute:'', Accuracy:0}];
 	};
 	$scope.reset = function(){
 		$scope.tpl_monster={};
-		$scope.tpl_monster.skills = [{type: '', baseDamage:0, baseAttribute:'', accuracy:0}];
+		$scope.tpl_monster.Skills = [{Type: '', BaseDamage:0, BaseAttribute:'', Accuracy:0}];
 	};
 	$scope.update = function(tpl_monster){
 		$http.put('http://games123-moraes001.rhcloud.com/api/tpl_monster',tpl_monster).then(function (response) {
@@ -63,7 +63,7 @@ app.controller('search', function($scope, $http, factoryService) {
 		$scope.tpl_monster.items = response.data;
 	});
 	$scope.loadRegister = function(tpl_monster){
-		factoryService.setSkills(tpl_monster.skills);
+		factoryService.setSkills(tpl_monster.Skills);
 		factoryService.setTpl_monster(tpl_monster);
 		factoryService.setUpdate(true);
 	};
@@ -82,7 +82,7 @@ app.factory('factoryService',function(){
 
 	var tpl_monster = {};
 	var update = false;
-	var skills = [{type: '', baseDamage:0, baseAttribute:'', accuracy:0}];
+	var Skills = [{Type: '', BaseDamage:0, BaseAttribute:'', Accuracy:0}];
     return{
         setTpl_monster:function(str){
             tpl_monster = str;

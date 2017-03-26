@@ -17,7 +17,7 @@ var TPL_MonsterSchema   = new Schema({
 	Accuracy: Number,
 	IsEnemy: Boolean,
 	SpriteName:String,
-	skills: []
+	Skills: []
 });
 
 
