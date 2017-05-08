@@ -4,6 +4,7 @@ var Schema       = mongoose.Schema;
 var MonsterSchema   = new Schema({
     Name: String,
 	Level: Number,
+	Position: Number,
 	Hp: Number,
 	Attack: Number,
 	Defense: Number,

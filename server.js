@@ -66,8 +66,7 @@ router.route('/users/:user*?')
     .post(function(req, res) {
 		User.create(req.body, function(err, user) {
             if (err)
-                res.send(err);
-
+				res.send(err);
             res.send(user);
         });
     })
@@ -219,9 +218,9 @@ router.route('/rename')
 		res.send("Success");
 	});
 	
-router.route('/tpl_monsters/random/isEnemy/:enemy/number/:number')	
+router.route('/tpl_monsters/random/number/:number')	
 	.get(function(req, res) {
-		TPL_Monster.find({ 'IsEnemy': req.params.enemy.toLowerCase() }).random(req.params.number, true, function(err, monsters) {
+		TPL_Monster.find().random(req.params.number, true, function(err, monsters) {
 			if (err)
 				res.send(err);
 			res.json(monsters);
@@ -241,6 +240,7 @@ router.route('/monsters')
 	
 	 // create a monster (accessed at PUT http://localhost:8080/api/monsters)
     .put(function(req, res) {
+
 		Monster.update({ '_id': req.body.Id }, { $set:  { 'Selected': req.body.Selected }}, function(err, mosnter) {
 			 
             if (err){
@@ -272,7 +272,7 @@ router.route('/monsters/selected/user/:userId')
 		
 router.route('/monsters/user/:userId')
 .get(function(req, res) {
-    Monster.find({ UserId: req.params.userId }, function(err, monster) {
+    Monster.find({ UserId: req.params.userId }, null, { sort: {'Position':'asc'}}, function(err, monster) {
         if (err)
             res.send(err);
         res.json(monster);

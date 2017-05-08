@@ -2,28 +2,24 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 		<script src="./script/angular.js"></script>
-		<style>
-			label { width: 200px; float: left; margin: 0 20px 0 0; }
-			span { display: block; margin: 0 0 3px; font-size: 1.2em; font-weight: bold; }
-			input[type=text] input[type=number] input[type=checkbox]{ width: 200px; border: 1px solid #000; padding: 5px; }
-			div { display: inline-block; margin: auto}
-			button{margin-top:10px; width: 35px; font-size: 1.5em; font-weight: bold;}
-			table { border-width: 1px; border-spacing: 2px; border-style: outset; border-color: gray; border-collapse: separate; background-color: white;}
-			td { border-width: 1px; padding: 1px; border-style: inset; border-color: gray; background-color: white; -moz-border-radius: ;}
-		</style>
 
 
 
     </head>
 
     <body ng-app="app" ng-controller="main">
-		<div>
-			<form>
-				<input type="button" ng-click="changePage(1)" value="Register" />
-				<input type="button" ng-click="changePage(0)" value="Search" />
+		<div class='container-left'>
+			<form >
+				<div class="form-horizontal">
+					<input type="button" ng-click="changePage(1)" class="btn btn-primary" value="Register" />
+					<input type="button" ng-click="changePage(0)" class="btn btn-primary" value="Search" />
+				</div>
 			</form>
 		</div>
 		<div class="slide-animate"  ng-include="page.url"></div>

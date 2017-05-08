@@ -6,8 +6,8 @@ app.controller('monster', function($scope, $http, factoryService) {
     $http.get("http://games123-moraes001.rhcloud.com/api/monster/images").then(function(response){
 		$scope.imgs.name = response.data;
 	});
-	var tpl_monster = {};
-	var Skills = [{Type: '', BaseDamage:0, BaseAttribute:'', Accuracy:0}];
+	var tpl_monster = {Level:0, Hp:0, Attack:0, Defense:0, MagicAttack:0, MagicDefense:0, Speed:0, CriticalChance:0, CriticalDamage:0, Evasion:0, Accuracy:0};
+	var Skills = [{keyElement:'', skillName:'',    BaseAttribute:0, Accuracy:0}];
 	$scope.isUpdate = factoryService.getUpdate();;
 	$scope.isSave = !$scope.isUpdate;
 	factoryService.setUpdate(false);
@@ -17,14 +17,14 @@ app.controller('monster', function($scope, $http, factoryService) {
 	factoryService.setSkills(Skills);
 	$scope.addSkill = function(){
 		var newItem = $scope.tpl_monster.Skills.length +1;
-		$scope.tpl_monster.Skills.push({Type: '', BaseDamage:0, BaseAttribute:'', Accuracy:0});
+		$scope.tpl_monster.Skills.push({keyElement:'', skillName:'',    BaseAttribute:0, Accuracy:0});
 	};
 	$scope.removeSkill = function(itemToRemove){
 		var index = $scope.tpl_monster.Skills.indexOf(itemToRemove);
 		$scope.tpl_monster.Skills.splice(index,1);
 		if($scope.tpl_monster.Skills.length == 0){
 			var newItem = $scope.tpl_monster.Skills.length +1;
-			$scope.tpl_monster.Skills.push({Type: '', BaseDamage:0, BaseAttribute:'', Accuracy:0});
+			$scope.tpl_monster.Skills.push({keyElement:'', skillName:'',    BaseAttribute:0, Accuracy:0});
 		}
 	};
 	$scope.save = function(tpl_monster){
@@ -33,12 +33,12 @@ app.controller('monster', function($scope, $http, factoryService) {
 				alert("Monster " + tpl_monster.Name + " saved sucefully.");
 			}
 		});
-		$scope.tpl_monster={};
-		$scope.tpl_monster.Skills = [{Type: '', BaseDamage:0, BaseAttribute:'', Accuracy:0}];
+		$scope.tpl_monster= {Level:0, Hp:0, Attack:0, Defense:0, MagicAttack:0, MagicDefense:0, Speed:0, CriticalChance:0, CriticalDamage:0, Evasion:0, Accuracy:0};
+		$scope.tpl_monster.Skills = [{keyElement:'', skillName:'',    BaseAttribute:0, Accuracy:0}];
 	};
 	$scope.reset = function(){
-		$scope.tpl_monster={};
-		$scope.tpl_monster.Skills = [{Type: '', BaseDamage:0, BaseAttribute:'', Accuracy:0}];
+		$scope.tpl_monster= {Level:0, Hp:0, Attack:0, Defense:0, MagicAttack:0, MagicDefense:0, Speed:0, CriticalChance:0, CriticalDamage:0, Evasion:0, Accuracy:0};
+		$scope.tpl_monster.Skills = [{keyElement:'', skillName:'',    BaseAttribute:0, Accuracy:0}];
 	};
 	$scope.update = function(tpl_monster){
 		$http.put('http://games123-moraes001.rhcloud.com/api/tpl_monster',tpl_monster).then(function (response) {
@@ -80,9 +80,9 @@ app.controller('search', function($scope, $http, factoryService) {
 });
 app.factory('factoryService',function(){
 
-	var tpl_monster = {};
+	var tpl_monster = {Level:0, Hp:0, Attack:0, Defense:0, MagicAttack:0, MagicDefense:0, Speed:0, CriticalChance:0, CriticalDamage:0, Evasion:0, Accuracy:0};
 	var update = false;
-	var Skills = [{Type: '', BaseDamage:0, BaseAttribute:'', Accuracy:0}];
+	var skills = [{keyElement:'', skillName:'',    BaseAttribute:0, Accuracy:0}];
     return{
         setTpl_monster:function(str){
             tpl_monster = str;
