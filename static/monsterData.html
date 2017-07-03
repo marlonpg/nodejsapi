@@ -47,40 +47,30 @@
 		
 			<div class="form-group">
 				<LEGEND><span>Skills: </span></LEGEND>
-				<fieldset data-ng-repeat="skill in tpl_monster.Skills" style="border: 0px; padding:0px;">
+				<fieldset ng-repeat="skill in tpl_monster.Skills" style="border: 0px; padding:0px;">
 					
-					<label for="keyElement" class="col-md-2 control-label"><span>Key Element: </span>
-					<select id="keyElement" ng-model="skill.keyElement" ng-init="skill.keyElement='Fire'"  class="form-control">
-						<option value="Fire">Fire</option>
-						<option value="Plant">Plant</option>
-						<option value="Water">Water</option>
-					</select></label>
+					<label for="keyElement" class="col-md-2 control-label"><span>Target: </span>
+						<select id="keyElement" ng-options="keyElement.Name for keyElement in keyElements" ng-model="skill.keyElement" class="form-control"></select>
+					</label>
 					
 					<label for="skillName" class="col-md-2 control-label"><span>Name: </span>
 					<input type="text" ng-model="skill.skillName" id="skillName"  class="form-control"/></label>
 					
 					<label for="type" class="col-md-2 control-label"><span>Type: </span>
-					<select id="type" ng-model="skill.type" ng-init="skill.type='Attack'" class="form-control">
-						<option value="Attack">Attack</option>
-						<option value="Buff">Buff</option>
-						<option value="Heal">Heal</option>
-					</select></label>
+						<select id="type" ng-options="type.Name for type in types" ng-model="skill.type" class="form-control"></select>
+					</label>
 					
-					<label for="baseDamage" class="col-md-2 control-label"><span>Base Damage: </span>
-					<select id="baseDamage" ng-model="skill.BaseDamage" ng-init="skill.BaseDamage='Hp'"  class="form-control">
-						<option value="Hp">Hp</option>
-						<option value="Attack">Attack</option>
-						<option value="Deffence">Deffence</option>
-					</select></label>
+					
+					<label for="baseDamage" class="col-md-2 control-label"><span>Base Atribute: </span>
+						<select id="baseDamage" ng-disabled="isDisabled(skill.type.baseAtribute)" ng-model="skill.baseAtribute" ng-options="baseAtribute.Name for baseAtribute in skill.type.baseAtribute" class="form-control"></select>
+					</label>
 					
 					<label for="target" class="col-md-2 control-label"><span>Target: </span>
-					<select id="target" ng-model="skill.target" ng-init="skill.target='Indiviudual'"  class="form-control">
-						<option value="Indiviudual">Indiviudual</option>
-						<option value="Multi">Multi</option>
-					</select></label>
+						<select id="target" ng-model="skill.target" ng-options="target.Name for target in targets" class="form-control"></select>
+					</label>
 					
-					<label for="baseAttribute" class="col-md-2 control-label"><span>Base Attribute: </span>
-					<input type="number" value="0" ng-model="skill.BaseAttribute" id="baseAttribute" class="form-control" /></label>
+					<label for="baseDamage" class="col-md-2 control-label"><span>Base Damage: </span>
+					<input type="number" value="0" ng-model="skill.baseDamage" id="baseDamage" class="form-control" /></label>
 					
 					<label for="accuracy" class="col-md-2 control-label"><span>Accuracy: </span>
 					<input type="number" value="0" ng-model="skill.Accuracy" id="accuracy" class="form-control" /></label>

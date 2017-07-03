@@ -1,0 +1,19 @@
+<div class='container-left'>
+	<div class="col-md-5">
+		<form id="targetForm" ng-controller="target">
+
+			<div>
+				<div class="form-horizontal">
+					<label for="name"><span>Name: </span>
+					<input type="text" id="name" ng-model="target.Name" size="50" class="form-control" /></label>
+				</div>
+			</div>
+		
+			<div class="form-group">
+				<input type="submit" ng-show="{{isUpdate}}" ng-click="update(target);changePage(6)" value="Update" class="btn btn-primary" />
+				<input type="submit" ng-show="{{isSave}}" ng-click="save(target);changePage(6)" value="Save" class="btn btn-primary" />
+				<input type="button" ng-click="reset()" value="Reset" />
+			</div>
+		</form>
+	</div>
+<div>

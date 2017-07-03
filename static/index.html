@@ -6,9 +6,21 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-route.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-		<script src="./script/angular.js"></script>
-
+		<script src="./script/moduleRegister.js"></script>
+		<script src="./script/factory.js"></script>
+		<script src="./script/config.js"></script>
+		<script src="./script/mainController.js"></script>
+		<script src="./script/monsterController.js"></script>
+		<script src="./script/searchController.js"></script>
+		<script src="./script/type/typeController.js"></script>
+		<script src="./script/type/searchTypeController.js"></script>
+		<script src="./script/keyElement/keyElementController.js"></script>
+		<script src="./script/keyElement/searchKeyElementController.js"></script>
+		<script src="./script/target/targetController.js"></script>
+		<script src="./script/target/searchTargetController.js"></script>
+		<script src="./script/directives.js"></script>
 
 
     </head>
@@ -17,11 +29,17 @@
 		<div class='container-left'>
 			<form >
 				<div class="form-horizontal">
-					<input type="button" ng-click="changePage(1)" class="btn btn-primary" value="Register" />
-					<input type="button" ng-click="changePage(0)" class="btn btn-primary" value="Search" />
+					<a href="#!/search" class="btn btn-primary"> Search Monster </a>
+					<a href="#!/monsterData" class="btn btn-primary"> Register Monster </a>
+					<a href="#!/searchType" class="btn btn-primary"> Search Type </a>
+					<a href="#!/typeRegister" class="btn btn-primary"> Register Type </a>
+					<a href="#!/searchKeyElement" class="btn btn-primary"> Search Key Element </a>
+					<a href="#!/keyElementRegister" class="btn btn-primary"> Register Key Element </a>
+					<a href="#!/searchTarget" class="btn btn-primary"> Search Target </a>
+					<a href="#!/targetRegister" class="btn btn-primary"> Register Target </a>
 				</div>
 			</form>
 		</div>
-		<div class="slide-animate"  ng-include="page.url"></div>
+		<div ng-view></div>
     </body>
 </html>
